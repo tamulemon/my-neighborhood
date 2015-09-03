@@ -90,7 +90,7 @@ var MapContainer = module.exports = React.createClass({
 		
 	// initiate map layer. Because map is not a DOM element, it doesn't get refreshed so shouldn't live on this.state
 		var map = this.map = L.map('map', {
-								center: [47.609, -122.332099],
+								center: [47.609, -122.250],
 								zoom: 12,
 								minZoom: 2,
 								maxZoom: 13,
@@ -135,7 +135,7 @@ var MapContainer = module.exports = React.createClass({
 
 		
 	// add a control that display neighborhood name when hovered over
-		var info = L.control({position: 'topright'});
+		var info = L.control({position: 'topleft'});
 		//when add is called, dom will create a div with class info. This is DOM element so an be CSS styled 
 		info.onAdd = function(map) {
 			this._div = L.DomUtil.create('div', 'info');
