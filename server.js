@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 8080;
 var parseString = require('xml2js').parseString;
 var request = require('superagent');
 
-var ZID = require('./config.js').ZID;
+var ZID = process.env.ZID;
 
 app.use(express.static(__dirname));
 

@@ -2,7 +2,6 @@ var React = require('react');
 var request = require('superagent');
 var parseString = require('xml2js').parseString;
 var seattleNeighborhoods = require('../data/geojson_cleanedup_remove_median.js');
-var config = require('../config.js');
 
 
 /// data for marker layers
@@ -98,7 +97,7 @@ var MapContainer = module.exports = React.createClass({
 								L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 									attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 									id: 'mobot11.1dba3612',
-									accessToken: config.accessToken
+									accessToken: process.env.accessToken
 								})
 							],
 								attributionControl: false,
