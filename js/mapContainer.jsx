@@ -94,7 +94,7 @@ var MapContainer = module.exports = React.createClass({
 								minZoom: 2,
 								maxZoom: 13,
 								layers: [
-									L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+process.env.accessToken, {
+									L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + process.env.accessToken, {
 									attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 									id: 'mobot11.1dba3612',
 								})
