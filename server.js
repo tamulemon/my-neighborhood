@@ -5,6 +5,7 @@ var parseString = require('xml2js').parseString;
 var request = require('superagent');
 
 var ZID = process.env.ZID;
+module.exports = process.env.accessToken;
 
 app.use(express.static(__dirname));
 
