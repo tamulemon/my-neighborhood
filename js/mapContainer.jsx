@@ -51,11 +51,12 @@ var MapContainer = module.exports = React.createClass({
 	},
 	
 	getAccessToken: function() {
+		console.log('getaccess function envoked');
 		request
 			.get('/token')
 			.end(function(err, data) {
 			if(res.ok) {
-				accessToken = res.accessToken;
+				accessToken = JSON.parse(res.data).accessToken;
 				console.log(accessToken);
 			} else {
 				console.log(res.text);
@@ -108,10 +109,9 @@ var MapContainer = module.exports = React.createClass({
 								minZoom: 2,
 								maxZoom: 13,
 								layers: [
-								L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+									L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
 									attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-									id: 'mobot11.1dba3612',
-									accessToken: accessToken
+									id: 'mobot11.1dba3612'
 								})
 							],
 								attributionControl: false,
