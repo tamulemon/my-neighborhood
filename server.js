@@ -5,9 +5,12 @@ var parseString = require('xml2js').parseString;
 var request = require('superagent');
 
 var ZID = process.env.ZID;
-module.exports = process.env.accessToken;
 
 app.use(express.static(__dirname));
+
+app.get('/token', function(req, res) {
+	res.json({accessToken: process.env.accessToken});
+});
 
 app.get('/neighborhoods', function(req, res) {
 	var url = 'http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=' + ZID + '&state=wa&city=seattle&childtype=neighborhood';

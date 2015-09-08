@@ -2,7 +2,7 @@ var React = require('react');
 var request = require('superagent');
 var parseString = require('xml2js').parseString;
 var seattleNeighborhoods = require('../data/geojson_cleanedup_remove_median.js');
-var accessToken = require('../server.js');
+var accessToken='';
 
 /// data for marker layers
 var crimeData = require('../data/seattle_homicide_data.js');
@@ -16,7 +16,7 @@ var RelationshipChart = require('./relationshipChart.jsx');
 
 
 var MapContainer = module.exports = React.createClass({
-
+	
 	//	load house median from zillows, transform and update geojson
 	loadAllNeighborhoods: function() {
 		request
@@ -50,6 +50,18 @@ var MapContainer = module.exports = React.createClass({
 		}.bind(this));
 	},
 	
+	getAccessToken: function() {
+		request
+			.get('/token')
+			.end(function(err, data) {
+			if(res.ok) {
+				accessToken = res.accessToken;
+				console.log(accessToken);
+			} else {
+				console.log(res.text);
+			}
+		})
+	},
 	
 	getColor: function(m) {
 		m = parseInt(m);
@@ -87,6 +99,7 @@ var MapContainer = module.exports = React.createClass({
 	componentDidMount: function() {
 
 		this.loadAllNeighborhoods();
+		this.getAccessToken();
 		
 	// initiate map layer. Because map is not a DOM element, it doesn't get refreshed so shouldn't live on this.state
 		var map = this.map = L.map('map', {
