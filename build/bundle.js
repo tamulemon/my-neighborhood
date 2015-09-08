@@ -1080,7 +1080,6 @@ var MapContainer = module.exports = React.createClass({displayName: "exports",
 			.end(function(err, res) {
 			if(res.ok) {
 				accessToken = JSON.parse(res.text).accessToken;
-				console.log('accessToken', accessToken);
 			} else {
 				console.log(res.text);
 			}
@@ -1124,7 +1123,7 @@ var MapContainer = module.exports = React.createClass({displayName: "exports",
 
 		this.loadAllNeighborhoods();
 		this.getAccessToken();
-		
+		console.log(accessToken);
 	// initiate map layer. Because map is not a DOM element, it doesn't get refreshed so shouldn't live on this.state
 		var map = this.map = L.map('map', {
 								center: [47.609, -122.250],
