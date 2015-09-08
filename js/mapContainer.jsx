@@ -51,13 +51,13 @@ var MapContainer = module.exports = React.createClass({
 	},
 	
 	getAccessToken: function() {
-		console.log('getaccess function envoked');
 		request
 			.get('/token')
-			.end(function(err, data) {
+			.end(function(err, res) {
 			if(res.ok) {
 				accessToken = JSON.parse(res.data).accessToken;
-				console.log(accessToken);
+				console.log(res.data);
+				console.log('accessToken', accessToken);
 			} else {
 				console.log(res.text);
 			}
