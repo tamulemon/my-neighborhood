@@ -17,9 +17,13 @@ app.get('/neighborhoods', function(req, res) {
 	request
 		.get(url)
 		.end(function(err, data) {
+		console.log(data.header); //Cache-controll was set to no-cache by Zillows 
 			if (err) {
 				console.log(err);
 			} else {
+				res.set({
+					'Cache-Control': 'max-age=3600'
+				})
 				res.send(data.text);
 			}
 		})
@@ -34,6 +38,7 @@ app.get('/:name', function(req, res) {
     if (err) {
       console.log('err', err);
     }
+		res.header('Cache-Control', 'max-age=3600');
     res.send(data.text);
   });
 });

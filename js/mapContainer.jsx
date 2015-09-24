@@ -21,6 +21,7 @@ var MapContainer = module.exports = React.createClass({
 	loadAllNeighborhoods: function() {
 		request
 			.get('/neighborhoods')
+			.set('Cache-Control', 'max-age=3600')
 			.end(function(err, res) {
 			if (res.ok) {
 				parseString(res.text, function(err, result) {
@@ -54,6 +55,7 @@ var MapContainer = module.exports = React.createClass({
 	getAccessToken: function() {
 		request
 			.get('/token')
+			.set('Cache-Control', 'max-age=3600')
 			.end(function(err, res) {
 			if(res.ok) {
 				accessToken = JSON.parse(res.text).accessToken;
@@ -278,6 +280,7 @@ var MapContainer = module.exports = React.createClass({
 				var zillowName = name.replace(/\s+/g, '');
 				request
 					.get('/' + zillowName)
+					.set('Cache-Control', 'max-age=3600')
 					.end(function(err, res) {
 					if (res.ok) {
 						parseString(res.text, function(err, result) {
@@ -315,7 +318,7 @@ var MapContainer = module.exports = React.createClass({
 				onEachFeature: onEachFeature
 			}).addTo(map);
 
-		}.bind(this), 800)
+		}.bind(this), 1000)
 	},
 
 	render: function() {
