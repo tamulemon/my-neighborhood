@@ -4,18 +4,26 @@ var PORT = process.env.PORT || 8080;
 var parseString = require('xml2js').parseString;
 var request = require('superagent');
 
-var ZID = require('./config.js').ZID;
+var ZID = process.env.ZID;
 
 app.use(express.static(__dirname));
+
+app.get('/token', function(req, res) {
+	res.json({accessToken: process.env.accessToken});
+});
 
 app.get('/neighborhoods', function(req, res) {
 	var url = 'http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=' + ZID + '&state=wa&city=seattle&childtype=neighborhood';
 	request
 		.get(url)
 		.end(function(err, data) {
+		console.log(data.header); //Cache-controll was set to no-cache by Zillows 
 			if (err) {
 				console.log(err);
 			} else {
+				res.set({
+					'Cache-Control': 'max-age=3600'
+				})
 				res.send(data.text);
 			}
 		})
@@ -30,6 +38,7 @@ app.get('/:name', function(req, res) {
     if (err) {
       console.log('err', err);
     }
+		res.header('Cache-Control', 'max-age=3600');
     res.send(data.text);
   });
 });
